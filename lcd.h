@@ -13,6 +13,19 @@
 #define CMD_MODE        0           //0 for command mode
 #define DATA_MODE       1           //1 for data mode
 
+//define Ports and Pins to interface LCD
+#define LCD_CONTROL_PORT P2 //control signal port
+#define LCD_RS          7        //register select pin -LCD command/data
+#define LCD_EN          6         //E clock pin -LCD Enable, falling edge active
+#define LCD_DATA        P4       //Data port -LCD Data pins (D0 - D7)
+#define LCD_DATA_PINS   0xFF
+
+#define Set_Command_Mode LCD_CONTROL_PORT->OUT = (LCD_CONTROL_PORT->OUT) & (~(0b1<<LCD_RS));
+#define Set_Data_Mode LCD_CONTROL_PORT->OUT = (LCD_CONTROL_PORT->OUT) | (0b1<<LCD_RS);
+
+#define Set_Enable_Low  LCD_CONTROL_PORT->OUT =  (LCD_CONTROL_PORT->OUT) & ~(0b1<<LCD_EN);
+#define Set_Enable_High  LCD_CONTROL_PORT->OUT =  (LCD_CONTROL_PORT->OUT) | (0b1<<LCD_EN);
+
 extern void Display(unsigned char , unsigned int );
 
 /* delay for indicated nr of ms */
@@ -20,7 +33,6 @@ extern void DelayMs(unsigned int);
 
 /* write a byte to the LCD in 8 bit mode */
 extern void lcd8bits_write(unsigned char mode, unsigned char CmdChar);
-extern void lcd4bits_write(unsigned char mode, unsigned char CmdChar);
 
 /* Clear and home the LCD */
 extern void lcd_clear(void);
@@ -35,10 +47,8 @@ extern void lcd_SetLineNumber_4bits(unsigned char pos);
 	
 /* intialize the LCD - call before anything else */
 extern void lcd8bits_init(void);
-extern void lcd4bits_init(void);
 
 extern void lcd_putch(char);
-extern void lcd_putch_4bits(char);
 
 /*	Set the cursor position */
 #define	lcd_cursor(x)	lcd_write(((x)&0x7F)|0x80)

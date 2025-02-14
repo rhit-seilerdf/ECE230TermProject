@@ -76,20 +76,8 @@ void DelayMs(unsigned int);
  *            |                  |
  *            |                  |
  */
-//define Ports and Pins to interface LCD
-#define LCD_CONTROL_PORT P2 //control signal port
-#define LCD_RS          7        //register select pin -LCD command/data
-#define LCD_EN          6         //E clock pin -LCD Enable, falling edge active
-#define LCD_DATA        P4       //Data port -LCD Data pins (D0 - D7)
-#define LCD_DATA_PINS       (BIT7 | BIT6 | BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0)
 
-#define Set_Command_Mode LCD_CONTROL_PORT->OUT = (LCD_CONTROL_PORT->OUT) & (~(0b1<<LCD_RS));
-#define Set_Data_Mode LCD_CONTROL_PORT->OUT = (LCD_CONTROL_PORT->OUT) | (0b1<<LCD_RS);
-
-#define Set_Enable_Low  LCD_CONTROL_PORT->OUT =  (LCD_CONTROL_PORT->OUT) & ~(0b1<<LCD_EN);
-#define Set_Enable_High  LCD_CONTROL_PORT->OUT =  (LCD_CONTROL_PORT->OUT) | (0b1<<LCD_EN);
-
-void lcd_init(void)
+void lcd8bits_init(void)
 {
     LCD_CONTROL_PORT->DIR = LCD_CONTROL_PORT->DIR | ((0x01<<LCD_RS) | (0x01<<LCD_EN));
     LCD_CONTROL_PORT->SEL0 = LCD_CONTROL_PORT->SEL0 & (~(0x01<<LCD_RS) | ~(0x01<<LCD_EN));
