@@ -19,6 +19,18 @@ const uint16_t TwinkleBeats[] = { 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2
                                   1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2,
                                   1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1};
 
+const uint16_t CurrentMusicNotes[] = {
+                                      NOTEF4, NOTEA4, NOTEB4,
+                                      NOTEF4, NOTEA4, NOTEB4,
+                                      NOTEF4, NOTEA4, NOTEB4,NOTEE5,
+                                      NOTED5,NOTEB4,NOTEC5,NOTEB4,NOTEG4,NOTEE4,
+                                      NOTED4,NOTEE4,NOTEG4,NOTEE4,NULL};
+const uint16_t CurrentMusicBeats[] = {4,4,2,
+                                      4,4,2,
+                                      4,4,4,4,
+                                      2,4,4,4,4,1,
+                                      2,4,4,1,NULL};
+
 void speaker_init(void)
 {
 
@@ -55,57 +67,42 @@ void NoteDurationConfiguration()
 
 void TA1_0_IRQHandler(void)
 {
-    static char nextnote = 0; //start with first note in a song
-    static char insert_rest = 0;
-    /* Check if interrupt triggered by CCR0 */
-    //clear interrupt flag
+    static char nextnote=0;
 
-    // serve CCR0 interrupt
-    if (insert_rest == 1)
-    {
-        // set CCR[0] interrupt to generate a 100ms rest
-        //turn off speaker;  SpeakerPort->DIR &= ~Speaker; to set P2.4 as input
-        TIMER_A1->CCR[0] = DELAY100MS;
-        SpeakerPort->DIR &= ~Speaker;
-        insert_rest = 0;
+    static char insert_rest=1;
+
+
+
+    if(TIMER_A1->CCTL[0] & TIMER_A_CCTLN_CCIFG)
+
+         {
+            TIMER_A1->R = 0;    //Clear Timer A1  count
+             if(insert_rest==1) {
+                 insert_rest=0;
+                 TIMER_A1->CCR[0] = DELAY100MS;
+                 SpeakerPort->DIR &= ~Speaker;            // set P2.4 as input
+             }
+             else {
+                 insert_rest=1;
+                 SpeakerPort->DIR |= Speaker;            // set P2.4 as output
+                 if(CurrentMusicNotes[nextnote]!=NULL)
+                     nextnote=nextnote+1;
+                 else
+                     nextnote=0;
+                 PlayNote(CurrentMusicNotes[nextnote]);
+                 switch (CurrentMusicBeats[nextnote]) {
+                     case 1:   TIMER_A1->CCR[0] = WHOLE_NOTE; break;          //Set full note
+                     case 3:   TIMER_A1->CCR[0] = DOTTED_HALF; break;
+                     case 2:   TIMER_A1->CCR[0] = HALF_NOTE;  break;    //Set half note
+                     case 4:   TIMER_A1->CCR[0] = QUARTER_NOTE; break;
+                     case 9:   TIMER_A1->CCR[0] = DOTTED_QUARTER; break;
+                     case 8:   TIMER_A1->CCR[0] = EIGHTH_NOTE;   break;//Set eighth note
+                     case 16:  TIMER_A1->CCR[0] = SIXTEENTH_NOTE; break;       //Set Sixteenth note
+                     default:  TIMER_A1->CCR[0] = QUARTER_NOTE;   break;       //Set quarter note
+
+         }
+
+     }
+             TIMER_A1->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;  //clear interrupt flag
     }
-    else
-    { //play next note
-      //set next note duration interrupt
-      //play the current note
-      //get next note into  TIMER_A0_CCR[0] and  TIMER_A0_CCR[1]
-
-           // TODO, define SONG array
-        if (TwinkleTwinkleLittleStar[nextnote] == NULL){
-            nextnote = 0;
-        }
-        switch(TwinkleBeats[nextnote]) {
-        case 4:
-            TIMER_A1->CCR[0] = FULL_NOTE;
-            break;
-        case 2:
-            TIMER_A1->CCR[0] = HALF_NOTE;
-            break;
-        case 1:
-            TIMER_A1->CCR[0] = QUARTER_NOTE;
-            break;
-        default:
-            TIMER_A1->CCR[0] = QUARTER_NOTE;
-        }
-        SpeakerPort->DIR |= Speaker;
-        PlayNote(TwinkleTwinkleLittleStar[nextnote]);
-        nextnote++;
-        insert_rest = 1;
-
-        if (TwinkleTwinkleLittleStar[nextnote] != NULL)
-        {
-            nextnote = nextnote + 1;
-        }
-        else
-        {
-            nextnote = 0;
-        }
-        insert_rest = 1;      //insert 100ms rest after the note is played.
-    }
-    TIMER_A1->CCTL[0] &= ~ TIMER_A_CCTLN_CCIFG;
 }      //end interrupt service
