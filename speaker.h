@@ -25,6 +25,7 @@
 #define TimerA0Prescaler 4 //Timer A prescaler
 #define TimerA0Clock  SMCLK/TimerA0Prescaler
 
+#define RestNote 1
 #define FrequencyA4 440 //Hz
 #define FrequencyB4 493.88 //Hz
 #define FrequencyC5 523.26 //Hz
@@ -57,6 +58,6 @@ extern void speaker_init(void);
 
 extern void PlayNote(unsigned int CurrentNote);
 
-extern void NoteDurationConfiguration():
+extern void NoteDurationConfiguration();
 
 #endif /* SPEAKER_H_ */

@@ -4,8 +4,7 @@
 void debounce(void)
 {
     volatile uint32_t delay = 0;
-    for (delay = 50000; delay > 0; delay--)
-        ;
+    for (delay = 50000; delay > 0; delay--);
 } //end debounce()
 
 void SwitchConfiguration(void)
@@ -29,14 +28,18 @@ void main(void)
 
 	SwitchConfiguration();
 
+	configHFXT();
+//	configLFXT();
+
 	speaker_init();
 
 	lcd8bits_init();
 
 	NoteDurationConfiguration();
 
-	PlayNote(NOTEA4);
+	PlayNote(NOTEA3);
 
 	__enable_irq();
 
+	while (1) {}
 }

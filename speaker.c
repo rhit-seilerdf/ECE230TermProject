@@ -7,6 +7,18 @@
 
 #include "speaker.h"
 
+const uint16_t TwinkleTwinkleLittleStar[] = {NOTEG3, NOTEG3, NOTED4, NOTED4, NOTEE4, NOTEE4, NOTED4, RestNote,
+                               NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, NOTEA3, NOTEG3, RestNote,
+                               NOTED4, NOTED4, NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, RestNote,
+                               NOTED4, NOTED4, NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, RestNote,
+                               NOTEG3, NOTEG3, NOTED4, NOTED4, NOTEE4, NOTEE4, NOTED4, RestNote,
+                               NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, NOTEA3, NOTEG3, RestNote,
+                               RestNote, RestNote, RestNote, RestNote,
+                               NULL};
+const uint16_t TwinkleBeats[] = { 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1,
+                                  1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2,
+                                  1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1};
+
 void speaker_init(void)
 {
 
@@ -85,15 +97,15 @@ void TA1_0_IRQHandler(void)
         nextnote++;
         insert_rest = 1;
 
-//        if (ANewSongNotes[nextnote] != NULL)
-//        {
-//            nextnote = nextnote + 1;
-//        }
-//        else
-//        {
-//            nextnote = 0;
-//        }
-//        insert_rest = 1;      //insert 100ms rest after the note is played.
+        if (TwinkleTwinkleLittleStar[nextnote] != NULL)
+        {
+            nextnote = nextnote + 1;
+        }
+        else
+        {
+            nextnote = 0;
+        }
+        insert_rest = 1;      //insert 100ms rest after the note is played.
     }
     TIMER_A1->CCTL[0] &= ~ TIMER_A_CCTLN_CCIFG;
 }      //end interrupt service
