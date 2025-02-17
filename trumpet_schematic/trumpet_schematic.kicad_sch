@@ -3076,7 +3076,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "20Ω"
 			(at 77.47 99.06 90)
 			(effects
 				(font

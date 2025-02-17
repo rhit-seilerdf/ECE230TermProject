@@ -1,6 +1,10 @@
 #include "msp.h"
 #include "trumpet.h"
 
+
+uint16_t songID = 1;
+const uint16_t numberOfSongs = 2;
+
 void debounce(void)
 {
     volatile uint32_t delay = 0;

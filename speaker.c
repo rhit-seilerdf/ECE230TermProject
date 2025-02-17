@@ -6,6 +6,7 @@
  */
 
 #include "speaker.h"
+#define NUMBEROFSONG 2
 
 const uint16_t TwinkleTwinkleLittleStar[] = {NOTEG3, NOTEG3, NOTED4, NOTED4, NOTEE4, NOTEE4, NOTED4, RestNote,
                                NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, NOTEA3, NOTEG3, RestNote,
@@ -30,6 +31,9 @@ const uint16_t CurrentMusicBeats[] = {4,4,2,
                                       4,4,4,4,
                                       2,4,4,4,4,1,
                                       2,4,4,1,NULL};
+
+const uint16_t* Song[NUMBEROFSONG] = {TwinkleTwinkleLittleStar, CurrentMusicNotes};
+const uint16_t* SongBeats[NUMBEROFSONG] = {TwinkleBeats, CurrentMusicBeats};
 
 void speaker_init(void)
 {
@@ -85,12 +89,12 @@ void TA1_0_IRQHandler(void)
              else {
                  insert_rest=1;
                  SpeakerPort->DIR |= Speaker;            // set P2.4 as output
-                 if(CurrentMusicNotes[nextnote]!=NULL)
+                 if(Song[songID][nextnote]!=NULL)
                      nextnote=nextnote+1;
                  else
                      nextnote=0;
-                 PlayNote(CurrentMusicNotes[nextnote]);
-                 switch (CurrentMusicBeats[nextnote]) {
+                 PlayNote(Song[songID][nextnote]);
+                 switch ((int)SongBeats[songID][nextnote]) {
                      case 1:   TIMER_A1->CCR[0] = WHOLE_NOTE; break;          //Set full note
                      case 3:   TIMER_A1->CCR[0] = DOTTED_HALF; break;
                      case 2:   TIMER_A1->CCR[0] = HALF_NOTE;  break;    //Set half note

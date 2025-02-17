@@ -82,6 +82,9 @@
 #define SIXTEENTH_NOTE ACLK/16
 #define DELAY100MS  ACLK/10    //100ms timer delay
 
+extern uint16_t songID;
+extern const uint16_t numberOfSongs;
+
 
 extern void speaker_init(void);
 
