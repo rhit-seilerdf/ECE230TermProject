@@ -34,7 +34,7 @@ const uint16_t CurrentMusicBeats[] = {4,4,2,
 
 const uint16_t* Song[NUMBEROFSONG] = {TwinkleTwinkleLittleStar, CurrentMusicNotes};
 const uint16_t* SongBeats[NUMBEROFSONG] = {TwinkleBeats, CurrentMusicBeats};
-char *SongNames[] = {"Twinkle Twinkle Little Star", "Saria's Song"};
+char *SongNames[] = {"Twinkle Twinkle", "Saria''s Song"};
 
 void speaker_init(void)
 {

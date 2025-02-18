@@ -3375,6 +3375,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R_Variable")
+		(at 161.29 91.44 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6feef610-f463-4360-beab-c1633a08481e")
+		(property "Reference" "R5"
+			(at 161.29 83.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "R_Variable"
+			(at 161.29 86.36 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 161.29 93.218 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 161.29 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Variable resistor"
+			(at 161.29 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5c56cb16-d779-4fc9-a73c-09a1988140d5")
+		)
+		(pin "2"
+			(uuid "06ac546c-45af-44fb-b53a-723ffc68ba4c")
+		)
+		(instances
+			(project ""
+				(path "/72e6d7f3-c76a-4c03-a31b-775dd92d8425"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Switch:SW_Push")
 		(at 229.87 162.56 0)
 		(unit 1)
@@ -3676,74 +3744,6 @@
 			(project ""
 				(path "/72e6d7f3-c76a-4c03-a31b-775dd92d8425"
 					(reference "Q1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 161.29 91.44 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ec9f0f81-a237-480d-a1a2-dccdab477b05")
-		(property "Reference" "R3"
-			(at 161.29 85.09 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5kΩ"
-			(at 161.29 87.63 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 161.29 89.662 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 161.29 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 161.29 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6598f0e5-3324-4e0c-b3f5-234c9c74f37d")
-		)
-		(pin "2"
-			(uuid "cfe563f6-7b32-4c41-a1e6-4ecd7ee5de54")
-		)
-		(instances
-			(project ""
-				(path "/72e6d7f3-c76a-4c03-a31b-775dd92d8425"
-					(reference "R3")
 					(unit 1)
 				)
 			)
