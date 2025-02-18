@@ -84,6 +84,7 @@
 
 extern uint16_t songID;
 extern const uint16_t numberOfSongs;
+extern char *SongNames[];
 
 
 extern void speaker_init(void);

@@ -2557,7 +2557,7 @@
 		)
 		(uuid "a225697f-c232-4ad9-9056-1780c045e4c6")
 	)
-	(label "VCC"
+	(label "VCC 5V"
 		(at 152.4 81.28 0)
 		(effects
 			(font

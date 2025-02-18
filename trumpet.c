@@ -41,7 +41,8 @@ void main(void)
 
 	NoteDurationConfiguration();
 
-	PlayNote(NOTEA3);
+	lcd_SetLineNumber(FirstLine);
+	lcd_puts(SongNames[songID]);
 
 	__enable_irq();
 
