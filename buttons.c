@@ -23,7 +23,7 @@ void ButtonInit()
         SwitchPort->IES |= (Button1 | Button2 | Button3 | PitchLOW | PitchMID | PitchHIGH);
         SwitchPort->IE |= (Button1 | Button2 | Button3 | PitchLOW | PitchMID | PitchHIGH);
         SwitchPort->IFG &= ~(Button1 | Button2 | Button3 | PitchLOW | PitchMID | PitchHIGH);
-        NVIC->ISER[1] |= (1)<<(PORT1_IRQn-32);
+        NVIC->ISER[1] |= (1)<<(PORT6_IRQn-32);
 
         JukeboxPort->DIR &= ~(PPbutton | SKIPbutton | SONGUP | SONGDOWN);
         JukeboxPort->REN |= (PPbutton | SKIPbutton | SONGUP | SONGDOWN);
