@@ -5,11 +5,10 @@
 uint16_t songID = 1;
 const uint16_t numberOfSongs = 2;
 
-void debounce(void)
-{
-    volatile uint32_t delay = 0;
-    for (delay = 50000; delay > 0; delay--);
-} //end debounce()
+enum Status {NO, YES};
+extern char NewNotePressed;
+extern char FoundNote;
+
 
 
 /**
@@ -20,10 +19,10 @@ void main(void)
 	WDT_A->CTL = WDT_A_CTL_PW | WDT_A_CTL_HOLD;		// stop watchdog timer
 
 
-	SwitchConfiguration();
 
 	configHFXT();
-//	configLFXT();
+   configLFXT();
+
 
 	speaker_init();
 
@@ -33,8 +32,15 @@ void main(void)
 
 	lcd_SetLineNumber(FirstLine);
 	lcd_puts(SongNames[songID]);
+	ButtonInit();
+
 
 	__enable_irq();
 
-	while (1) {}
+	while (1) {
+	    if(NewNotePressed==YES) {
+	                NewNotePressed=NO;
+	                printf("Note Found: %d \r\n", FoundNote);
+	            }
+	}
 }

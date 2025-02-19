@@ -34,7 +34,7 @@ const uint16_t CurrentMusicBeats[] = {4,4,2,
 
 const uint16_t* Song[NUMBEROFSONG] = {TwinkleTwinkleLittleStar, CurrentMusicNotes};
 const uint16_t* SongBeats[NUMBEROFSONG] = {TwinkleBeats, CurrentMusicBeats};
-char *SongNames[] = {"Twinkle Twinkle", "Saria''s Song"};
+char *SongNames[] = {"Twinkle Twinkle", "Lost Woods Theme"};
 
 void speaker_init(void)
 {
@@ -110,4 +110,8 @@ void TA1_0_IRQHandler(void)
      }
              TIMER_A1->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;  //clear interrupt flag
     }
+
 }      //end interrupt service
+
+
+
