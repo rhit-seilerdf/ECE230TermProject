@@ -21,9 +21,9 @@
 #define PitchHIGH BIT5
 
 #define PPbutton BIT0
-#define SKIPbutton BIT1
-#define SONGUP BIT2
-#define SONGDOWN BIT3
+#define SKIPbutton BIT2
+#define SONGUP BIT5
+#define SONGDOWN BIT6
 
 extern void ButtonInit();
 

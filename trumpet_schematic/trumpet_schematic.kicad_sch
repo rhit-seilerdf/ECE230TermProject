@@ -2277,7 +2277,7 @@
 		)
 		(uuid "07950220-69b9-4176-bc01-16111f782fd5")
 	)
-	(label "P3.1"
+	(label "P3.2"
 		(at 256.54 152.4 180)
 		(effects
 			(font
@@ -2287,7 +2287,7 @@
 		)
 		(uuid "164b274f-a97c-424e-858b-379651d6b03f")
 	)
-	(label "P1.4"
+	(label "P6.6"
 		(at 256.54 130.81 180)
 		(effects
 			(font
@@ -2297,7 +2297,7 @@
 		)
 		(uuid "1e95eb17-90ad-4dd2-a5a6-c378c8af0ebb")
 	)
-	(label "P1.3"
+	(label "P6.5"
 		(at 256.54 125.73 180)
 		(effects
 			(font
@@ -2337,7 +2337,7 @@
 		)
 		(uuid "2505eb4f-a7de-473a-93a8-1ff62336ed0e")
 	)
-	(label "P1.5"
+	(label "P6.7"
 		(at 256.54 135.89 180)
 		(effects
 			(font
@@ -2387,7 +2387,7 @@
 		)
 		(uuid "348d8c5d-8014-48b5-9a7b-13c277a697d7")
 	)
-	(label "P1.1"
+	(label "P6.1"
 		(at 256.54 115.57 180)
 		(effects
 			(font
@@ -2417,7 +2417,7 @@
 		)
 		(uuid "3d308e62-9064-4107-9a46-52392ec12c6d")
 	)
-	(label "P1.0"
+	(label "P6.0"
 		(at 256.54 110.49 180)
 		(effects
 			(font
@@ -2537,7 +2537,7 @@
 		)
 		(uuid "9446eb80-868f-42a0-9124-e2c024ec929c")
 	)
-	(label "P1.2"
+	(label "P6.4"
 		(at 256.54 120.65 180)
 		(effects
 			(font
@@ -2547,7 +2547,7 @@
 		)
 		(uuid "97223f8d-04d1-44c1-852c-72cfce6a1ee2")
 	)
-	(label "P3.2"
+	(label "P3.5"
 		(at 256.54 157.48 180)
 		(effects
 			(font
@@ -2557,7 +2557,7 @@
 		)
 		(uuid "a225697f-c232-4ad9-9056-1780c045e4c6")
 	)
-	(label "VCC 5V"
+	(label "VCC"
 		(at 152.4 81.28 0)
 		(effects
 			(font
@@ -2607,7 +2607,7 @@
 		)
 		(uuid "ec84061c-0b7a-4ba8-b815-be24a1cad5ab")
 	)
-	(label "P3.3"
+	(label "P3.6"
 		(at 256.54 162.56 180)
 		(effects
 			(font
@@ -3375,74 +3375,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_Variable")
-		(at 161.29 91.44 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6feef610-f463-4360-beab-c1633a08481e")
-		(property "Reference" "R5"
-			(at 161.29 83.82 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "R_Variable"
-			(at 161.29 86.36 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 161.29 93.218 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 161.29 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Variable resistor"
-			(at 161.29 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5c56cb16-d779-4fc9-a73c-09a1988140d5")
-		)
-		(pin "2"
-			(uuid "06ac546c-45af-44fb-b53a-723ffc68ba4c")
-		)
-		(instances
-			(project ""
-				(path "/72e6d7f3-c76a-4c03-a31b-775dd92d8425"
-					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Switch:SW_Push")
 		(at 229.87 162.56 0)
 		(unit 1)
@@ -3744,6 +3676,74 @@
 			(project ""
 				(path "/72e6d7f3-c76a-4c03-a31b-775dd92d8425"
 					(reference "Q1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 161.29 91.44 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ec9f0f81-a237-480d-a1a2-dccdab477b05")
+		(property "Reference" "R3"
+			(at 161.29 85.09 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5kΩ"
+			(at 161.29 87.63 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 161.29 89.662 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 161.29 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 161.29 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6598f0e5-3324-4e0c-b3f5-234c9c74f37d")
+		)
+		(pin "2"
+			(uuid "cfe563f6-7b32-4c41-a1e6-4ecd7ee5de54")
+		)
+		(instances
+			(project ""
+				(path "/72e6d7f3-c76a-4c03-a31b-775dd92d8425"
+					(reference "R3")
 					(unit 1)
 				)
 			)
