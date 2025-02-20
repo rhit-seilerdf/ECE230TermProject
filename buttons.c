@@ -83,7 +83,7 @@ uint16_t delayloop;
             if((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))  {   //still pressed
                 ButtonNumber = i+1;
                 while((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))
-                    PortValue=JukeBoxPresses->IN; //wait for release
+                    PortValue=JukeboxPort->IN; //wait for release
                 break;
         }
         for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
@@ -121,12 +121,12 @@ void PORT3_IRQHandler(void)
 
 {
     uint32_t status;
-       FoundNote = FindNote(JukeboxPresses);
+       FoundNote = FindButton(JukeboxPresses);
 
        if(FoundNote!=0) {
-               NewNotePressed=YES;
+               NewButtonPressed=YES;
            }
-           else NewNotePressed=NO;
+           else NewButtonPressed=NO;
            status = JukeboxPort->IFG;
            JukeboxPort->IFG &=~status;
 
