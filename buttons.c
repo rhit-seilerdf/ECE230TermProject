@@ -121,7 +121,7 @@ void PORT3_IRQHandler(void)
 
 {
     uint32_t status;
-       FoundNote = FindButton(JukeboxPresses);
+       FoundButton = FindButton(JukeboxPresses);
 
        if(FoundNote!=0) {
                NewButtonPressed=YES;

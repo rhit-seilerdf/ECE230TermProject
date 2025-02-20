@@ -47,6 +47,15 @@
 #define FrequencyE4 329.63
 #define FrequencyG4 392
 
+#define FrequencyB3 246.94
+#define FrequencyF4s 370
+#define FrequencyG4 392
+#define FrequencyA4f 415.3
+#define FrequencyG4s 415.3
+#define FrequencyB3f 233.08
+#define FrequencyB4f 466.16
+#define FrequencyF5 698.46
+#define FrequencyG5 784
 
 
 // Note A4 - 440 Hz, B4 - 493.88 Hz, C5 - 523.26 Hz
@@ -71,6 +80,16 @@
 #define NOTEC4  TimerA0Clock/FrequencyC4
 #define NOTEB3  TimerA0Clock/FrequencyB3
 #define NOTEA3  TimerA0Clock/FrequencyA3
+
+#define NOTEB3  TimerA0Clock/FrequencyB3
+#define NOTEF4s TimerA0Clock/FrequencyF4s
+#define NOTEG4  TimerA0Clock/FrequencyG4
+#define NOTEA4f TimerA0Clock/FrequencyA4f
+#define NOTEG4s TimerA0Clock/FrequencyG4s
+#define NOTEB3f TimerA0Clock/FrequencyB3f
+#define NOTEB4f TimerA0Clock/FrequencyB4f
+#define NOTEF5  TimerA0Clock/FrequencyF5
+#define NOTEG5  TimerA0Clock/FrequencyG5
 
 #define ACLK 32768 //Hz
 #define WHOLE_NOTE       ACLK    //1 second
