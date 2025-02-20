@@ -8,6 +8,8 @@ const uint16_t numberOfSongs = 2;
 enum Status {NO, YES};
 extern char NewNotePressed;
 extern char FoundNote;
+extern char NewButtonPressed;
+extern char FoundButton;
 
 
 
@@ -42,5 +44,10 @@ void main(void)
 	                NewNotePressed=NO;
 	                printf("Note Found: %d \r\n", FoundNote);
 	            }
+
+	    if(NewButtonPressed==YES) {
+	                        NewButtonPressed=NO;
+	                        printf("Button Found: %d \r\n", FoundButton);
+	                    }
 	}
 }

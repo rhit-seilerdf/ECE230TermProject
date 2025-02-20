@@ -57,12 +57,17 @@
 #define Note23 ~(BIT0|BIT1|BIT4|BIT6)
 #define Note24 ~(BIT0|BIT1|BIT4|BIT7)
 
+#define PPbuttonPressed ~(PPbutton)
+#define SkipPressed ~(SKIPbutton)
+#define SongUpPressed ~(SONGUP)
+#define SongDownPressed ~(SONGDOWN)
+
 
 
 
 
 extern void ButtonInit();
 extern char FindNote(const char Notes[]);
-
+extern char FindButton(const char JukeboxPresses[]);
 
 #endif /* BUTTONS_H_ */
