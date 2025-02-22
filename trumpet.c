@@ -22,7 +22,7 @@ void main(void)
 
 
 	configHFXT();
-   configLFXT();
+	configLFXT();
 
 
 	speaker_init();
@@ -30,6 +30,7 @@ void main(void)
 	lcd8bits_init();
 	lcd_clear();
     lcd_SetLineNumber(FirstLine);
+	lcd_home();
     lcd_puts(SongNames[songID]);
 
 //	NoteDurationConfiguration();

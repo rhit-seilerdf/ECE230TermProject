@@ -1,24 +1,24 @@
-//File Name: lcd.c
+//File Name: lcd8bits_ece230winter24_25.c
 //Author: Jianjian Song
 //Date: January 28, 2025
 //ECE230-01/02 Winter 2024-2025
 //
 /*
- *	LCD Display Panel Driver Routines
+ *  LCD Display Panel Driver Routines
  *  Reference:  Refer to the Optrex LCD User Manual for all details and command formats
  *              used in these routines "Optrex LCD Manual Dmcman_full-user manual.pdf" 
  *
- *	All necessary LCD and delay functions have been bundled into this file,
+ *  All necessary LCD and delay functions have been bundled into this file,
  *  and the necessary function prototype statements are bundled into the 
  *  companion header file, lcd4bit.h.  Therefore by including lcd4bit.c into 
  *  a project along with a separate "main.c" program that calls one or more of these
  *  the LCD panel display routines and contains an "#include "lcd8bit.h" header file,
  *  you need not cut and paste all of these routines into the main program file itself.
  *
- *	This code will interface to a wide variety of B/W LCD Display Controllers
- *	like the Hitachi HD44780. It uses the 8-bit transfer mode, and it assumes that the
+ *  This code will interface to a wide variety of B/W LCD Display Controllers
+ *  like the Hitachi HD44780. It uses the 8-bit transfer mode, and it assumes that the
  *  pins of PORT D (RD7:0) are connected to the LCD panel, with
- *	the hardware connected as follows, assuming the standard 16 pin LCD pinout:
+ *  the hardware connected as follows, assuming the standard 16 pin LCD pinout:
  
  *    Pin 1: Vss = GND
  *    Pin 2: VDD = +5V
@@ -26,23 +26,23 @@
  *    Pin 4: Register Select RS, RS=1 for command and RS=0 for data
  *    Pin 5: R/W* to be connected to GND for write only
  *    Pin 6: E or clock pin, falling edge to latch data line
- *	  Pins 7-14: LCD data bits 0-7 LCD
- *	  Pin 15: +4.2V for LED back light
- *	  Pin 16: GND for LED back light
- *	
- *	The available routines in this file are:
+ *    Pins 7-14: LCD data bits 0-7 LCD
+ *    Pin 15: +4.2V for LED back light
+ *    Pin 16: GND for LED back light
+ *
+ *  The available routines in this file are:
  *
  *    1.  lcd8bits_bits( )
  *        Always call lcd_init() first, which follows the manufacturer's
  *        directions for initializing the LCD display panel into 8-bit transfer mode.
  *        Then you may call any of the other routines, as needed.  Note that this
  *        initialization routine also makes RD7:0 all outputs, as required to drive
- *		  the LCD panel connected to RD7:0.  It also selects 8 MHz internal clock.
+ *        the LCD panel connected to RD7:0.  It also selects 8 MHz internal clock.
  *
  *    2.  lcd_clear( )
  *        Clears LCD display and homes the cursor
  *
- *	  3.  lcd_puts(const char s*)
+ *    3.  lcd_puts(const char s*)
  *        writes a constant character string to the lcd panel
  *
  *    4.  lcd_putch(char s)
@@ -53,8 +53,8 @@
  *        the columns of Row 1 are 0x00....0x10
  *        the columns of Row 2 are 0x40....0x50
  *
- *	  6.  DelayMs(unsigned int NrMs)
- *		  Delays for NrMs milliseconds.
+ *    6.  DelayMs(unsigned int NrMs)
+ *        Delays for NrMs milliseconds.
  *
  */
 #include <lcd.h>
@@ -76,6 +76,18 @@ void DelayMs(unsigned int);
  *            |                  |
  *            |                  |
  */
+//define Ports and Pins to interface LCD
+#define LCD_CONTROL_PORT P2 //control signal port
+#define LCD_RS          7        //register select pin -LCD command/data
+#define LCD_EN          6         //E clock pin -LCD Enable, falling edge active
+#define LCD_DATA        P4       //Data port -LCD Data pins (D0 - D7)
+#define LCD_DATA_PINS       (BIT7 | BIT6 | BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0)
+
+#define Set_Command_Mode LCD_CONTROL_PORT->OUT = (LCD_CONTROL_PORT->OUT) & (~(0b1<<LCD_RS));
+#define Set_Data_Mode LCD_CONTROL_PORT->OUT = (LCD_CONTROL_PORT->OUT) | (0b1<<LCD_RS);
+
+#define Set_Enable_Low  LCD_CONTROL_PORT->OUT =  (LCD_CONTROL_PORT->OUT) & ~(0b1<<LCD_EN);
+#define Set_Enable_High  LCD_CONTROL_PORT->OUT =  (LCD_CONTROL_PORT->OUT) | (0b1<<LCD_EN);
 
 void lcd8bits_init(void)
 {
@@ -133,6 +145,10 @@ void lcd8bits_write(unsigned char mode, unsigned char CmdChar) {
     LCD_STROBE(); // Write 8 bits of data on D7-0
 }
 
+void lcd_home(void) {
+    lcd8bits_write(CMD_MODE, 0x02);
+}
+
 /* write a string of chars to the LCD */
 void lcd_puts(char *string) {
     while (*string != 0) // Last character in a C-language string is alway "0" (ASCII NULL character)
@@ -140,7 +156,7 @@ void lcd_puts(char *string) {
 }
 
 /*
- * 	Clear and home the LCD
+ *  Clear and home the LCD
  */
 void lcd_clear(void) {
     lcd8bits_write(CMD_MODE, LCDCMD_ClearDisplay);

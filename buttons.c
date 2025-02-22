@@ -185,7 +185,7 @@ void playJukebox(JukeBoxButton FoundButton)
     }
 }
 
-#define DEBOUNCETIME 15000
+#define DEBOUNCETIME 5000
 void debounce(void)
 {
     uint16_t delayloop;
@@ -218,9 +218,9 @@ char FindNote(const char Notes[])
                 PlayNote(RestNote);
                 break;
             }
-            debounce();
         }
     }
+    debounce();
     return NoteNumber;
 }
 
@@ -239,13 +239,13 @@ JukeBoxButton FindButton(const char JukeBoxPresses[])
             if ((PortValue & ButtonBits) == (JukeBoxPresses[i] & ButtonBits))
             {   //still pressed
                 ButtonNumber = i + 1;
-                while ((PortValue & ButtonBits) == (Notes[i] & ButtonBits))
+                while ((PortValue & ButtonBits) == (JukeBoxPresses[i] & ButtonBits))
                     PortValue = JukeboxPort->IN; //wait for release
                 break;
             }
-            debounce();
         }
     }
+    debounce();
     return ButtonNumber;
 }
 
@@ -266,7 +266,7 @@ void PORT6_IRQHandler(void)
         NewNotePressed = YES;
     }
     else
-        NewNotePressed = NO;
+    NewNotePressed = NO;
     status = SwitchPort->IFG;
     SwitchPort->IFG &= ~status;
 

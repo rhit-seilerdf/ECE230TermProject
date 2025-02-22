@@ -10,38 +10,59 @@
 #define NUMBEROFSONGS 2
 
 int songID = 0;
-static char nextnote=0;
+static char nextnote = 0;
 
-static char insert_rest=1;
+static char insert_rest = 1;
 
-const uint16_t TwinkleTwinkleLittleStar[] = {NOTEG3, NOTEG3, NOTED4, NOTED4, NOTEE4, NOTEE4, NOTED4, RestNote,
-                               NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, NOTEA3, NOTEG3, RestNote,
-                               NOTED4, NOTED4, NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, RestNote,
-                               NOTED4, NOTED4, NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, RestNote,
-                               NOTEG3, NOTEG3, NOTED4, NOTED4, NOTEE4, NOTEE4, NOTED4, RestNote,
-                               NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, NOTEA3, NOTEG3, RestNote,
-                               RestNote, RestNote, RestNote, RestNote,
-                               NULL};
-const uint16_t TwinkleBeats[] = { 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1,
-                                  1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2,
-                                  1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1};
+const uint16_t TwinkleTwinkleLittleStar[] = { NOTEG3, NOTEG3, NOTED4, NOTED4,
+NOTEE4,
+                                              NOTEE4, NOTED4, RestNote,
+                                              NOTEC4,
+                                              NOTEC4, NOTEB3, NOTEB3, NOTEA3,
+                                              NOTEA3,
+                                              NOTEG3, RestNote,
+                                              NOTED4,
+                                              NOTED4, NOTEC4, NOTEC4, NOTEB3,
+                                              NOTEB3,
+                                              NOTEA3, RestNote,
+                                              NOTED4,
+                                              NOTED4, NOTEC4, NOTEC4, NOTEB3,
+                                              NOTEB3,
+                                              NOTEA3, RestNote,
+                                              NOTEG3,
+                                              NOTEG3, NOTED4, NOTED4, NOTEE4,
+                                              NOTEE4,
+                                              NOTED4, RestNote,
+                                              NOTEC4,
+                                              NOTEC4, NOTEB3, NOTEB3, NOTEA3,
+                                              NOTEA3,
+                                              NOTEG3, RestNote,
+                                              RestNote,
+                                              RestNote, RestNote, RestNote,
+                                              NULL };
+const uint16_t TwinkleBeats[] = { 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2,
+                                  2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1,
+                                  2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1,
+                                  1, 2, 2, 1, 1, 1, 1 };
 
 const uint16_t CurrentMusicNotes[] = {
-                                      NOTEF4, NOTEA4, NOTEB4,
-                                      NOTEF4, NOTEA4, NOTEB4,
-                                      NOTEF4, NOTEA4, NOTEB4,NOTEE5,
-                                      NOTED5,NOTEB4,NOTEC5,NOTEB4,NOTEG4,NOTEE4,
-                                      NOTED4,NOTEE4,NOTEG4,NOTEE4,NULL};
-const uint16_t CurrentMusicBeats[] = {4,4,2,
-                                      4,4,2,
-                                      4,4,4,4,
-                                      2,4,4,4,4,1,
-                                      2,4,4,1,NULL};
+NOTEF4,
+                                       NOTEA4, NOTEB4,
+                                       NOTEF4,
+                                       NOTEA4, NOTEB4,
+                                       NOTEF4,
+                                       NOTEA4, NOTEB4, NOTEE5,
+                                       NOTED5,
+                                       NOTEB4, NOTEC5, NOTEB4, NOTEG4, NOTEE4,
+                                       NOTED4,
+                                       NOTEE4, NOTEG4, NOTEE4, NULL };
+const uint16_t CurrentMusicBeats[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 4,
+                                       4, 1, 2, 4, 4, 1, NULL };
 
-const uint16_t* Song[NUMBEROFSONGS] = {TwinkleTwinkleLittleStar, CurrentMusicNotes};
-const uint16_t* SongBeats[NUMBEROFSONGS] = {TwinkleBeats, CurrentMusicBeats};
-char *SongNames[] = {"Twinkle Twinkle", "Lost Woods Theme"};
-
+const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar,
+                                        CurrentMusicNotes };
+const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, CurrentMusicBeats };
+char *SongNames[] = { "Twinkle Twinkle", "Lost Woods Theme" };
 
 void speaker_init(void)
 {
@@ -74,6 +95,7 @@ void StartSong()
     TIMER_A1->CTL = 0b0000000100010100;  //0x0114
     lcd_clear();
     lcd_SetLineNumber(FirstLine);
+    lcd_home();
     lcd_puts(SongNames[songID]);
     // Enable TA1 TA1CCR0 compare interrupt
     NVIC->ISER[0] |= (1) << TA1_0_IRQn;
@@ -92,6 +114,7 @@ void SongUp(void)
     songID = (songID + 1) % NUMBEROFSONGS;
     lcd_clear();
     lcd_SetLineNumber(FirstLine);
+    lcd_home();
     lcd_puts(SongNames[songID]);
     nextnote = 0;
     insert_rest = 1;
@@ -102,6 +125,7 @@ void SongDown(void)
     songID = abs((songID - 1) % NUMBEROFSONGS);
     lcd_clear();
     lcd_SetLineNumber(FirstLine);
+    lcd_home();
     lcd_puts(SongNames[songID]);
     nextnote = 0;
     insert_rest = 1;
@@ -110,41 +134,36 @@ void SongDown(void)
 void TA1_0_IRQHandler(void)
 {
 
-
     if(TIMER_A1->CCTL[0] & TIMER_A_CCTLN_CCIFG)
 
-         {
-            TIMER_A1->R = 0;    //Clear Timer A1  count
-             if(insert_rest==1) {
-                 insert_rest=0;
-                 TIMER_A1->CCR[0] = DELAY100MS;
-                 SpeakerPort->DIR &= ~Speaker;            // set P2.4 as input
+             {
+                TIMER_A1->R = 0;    //Clear Timer A1  count
+                 if(insert_rest==1) {
+                     insert_rest=0;
+                     TIMER_A1->CCR[0] = DELAY100MS;
+                     SpeakerPort->DIR &= ~Speaker;            // set P2.4 as input
+                 }
+                 else {
+                     insert_rest=1;
+                     SpeakerPort->DIR |= Speaker;            // set P2.4 as output
+                     if(Song[songID][nextnote]!=NULL)
+                         nextnote=nextnote+1;
+                     else
+                         nextnote=0;
+                     PlayNote(Song[songID][nextnote]);
+                     switch ((int)SongBeats[songID][nextnote]) {
+                         case 1:   TIMER_A1->CCR[0] = WHOLE_NOTE; break;          //Set full note
+                         case 3:   TIMER_A1->CCR[0] = DOTTED_HALF; break;
+                         case 2:   TIMER_A1->CCR[0] = HALF_NOTE;  break;    //Set half note
+                         case 4:   TIMER_A1->CCR[0] = QUARTER_NOTE; break;
+                         case 9:   TIMER_A1->CCR[0] = DOTTED_QUARTER; break;
+                         case 8:   TIMER_A1->CCR[0] = EIGHTH_NOTE;   break;//Set eighth note
+                         case 16:  TIMER_A1->CCR[0] = SIXTEENTH_NOTE; break;       //Set Sixteenth note
+                         default:  TIMER_A1->CCR[0] = QUARTER_NOTE;   break;       //Set quarter note
+                     }
+                 }
+                 TIMER_A1->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;  //clear interrupt flag
              }
-             else {
-                 insert_rest=1;
-                 SpeakerPort->DIR |= Speaker;            // set P2.4 as output
-                 if(Song[songID][nextnote]!=NULL)
-                     nextnote=nextnote+1;
-                 else
-                     StopSong();
-                 PlayNote(Song[songID][nextnote]);
-                 switch ((int)SongBeats[songID][nextnote]) {
-                     case 1:   TIMER_A1->CCR[0] = WHOLE_NOTE; break;          //Set full note
-                     case 3:   TIMER_A1->CCR[0] = DOTTED_HALF; break;
-                     case 2:   TIMER_A1->CCR[0] = HALF_NOTE;  break;    //Set half note
-                     case 4:   TIMER_A1->CCR[0] = QUARTER_NOTE; break;
-                     case 9:   TIMER_A1->CCR[0] = DOTTED_QUARTER; break;
-                     case 8:   TIMER_A1->CCR[0] = EIGHTH_NOTE;   break;//Set eighth note
-                     case 16:  TIMER_A1->CCR[0] = SIXTEENTH_NOTE; break;       //Set Sixteenth note
-                     default:  TIMER_A1->CCR[0] = QUARTER_NOTE;   break;       //Set quarter note
-
-         }
-
-     }
-             TIMER_A1->CCTL[0] &= ~TIMER_A_CCTLN_CCIFG;  //clear interrupt flag
-    }
 
 }      //end interrupt service
-
-
 
