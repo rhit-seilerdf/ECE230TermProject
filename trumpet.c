@@ -2,8 +2,6 @@
 #include "trumpet.h"
 
 
-uint16_t songID = 1;
-const uint16_t numberOfSongs = 2;
 
 enum Status {NO, YES};
 extern char NewNotePressed;
@@ -30,11 +28,11 @@ void main(void)
 	speaker_init();
 
 	lcd8bits_init();
+	lcd_SetLineNumber(FirstLine);
 
 //	NoteDurationConfiguration();
 
-	lcd_SetLineNumber(FirstLine);
-	lcd_puts(SongNames[songID]);
+
 	ButtonInit();
 
 

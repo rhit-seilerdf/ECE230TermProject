@@ -6,7 +6,13 @@
  */
 
 #include "speaker.h"
-#define NUMBEROFSONG 2
+#include <stdlib.h>
+#define NUMBEROFSONGS 2
+
+int songID = 0;
+static char nextnote=0;
+
+static char insert_rest=1;
 
 const uint16_t TwinkleTwinkleLittleStar[] = {NOTEG3, NOTEG3, NOTED4, NOTED4, NOTEE4, NOTEE4, NOTED4, RestNote,
                                NOTEC4, NOTEC4, NOTEB3, NOTEB3, NOTEA3, NOTEA3, NOTEG3, RestNote,
@@ -32,9 +38,10 @@ const uint16_t CurrentMusicBeats[] = {4,4,2,
                                       2,4,4,4,4,1,
                                       2,4,4,1,NULL};
 
-const uint16_t* Song[NUMBEROFSONG] = {TwinkleTwinkleLittleStar, CurrentMusicNotes};
-const uint16_t* SongBeats[NUMBEROFSONG] = {TwinkleBeats, CurrentMusicBeats};
+const uint16_t* Song[NUMBEROFSONGS] = {TwinkleTwinkleLittleStar, CurrentMusicNotes};
+const uint16_t* SongBeats[NUMBEROFSONGS] = {TwinkleBeats, CurrentMusicBeats};
 char *SongNames[] = {"Twinkle Twinkle", "Lost Woods Theme"};
+
 
 void speaker_init(void)
 {
@@ -54,7 +61,7 @@ void PlayNote(unsigned int CurrentNote)
     TIMER_A0->CCR[1] = (CurrentNote / 2) - 1;
 }
 
-void NoteDurationConfiguration()
+void StartSong()
 {
     /* Configure Timer_A1 and CCRs */
     // Set initial period in CCR0 register. This assumes timer starts at 0
@@ -65,17 +72,39 @@ void NoteDurationConfiguration()
     // Configure Timer_A1 in UP Mode with source ACLK prescale 1:1 and no interrupt
     // configure Timer_A1: ACLK, UP mode, TACLR=1 bit 2, no interrupt
     TIMER_A1->CTL = 0b0000000100010100;  //0x0114
-
+    lcd_puts(SongNames[songID]);
     // Enable TA1 TA1CCR0 compare interrupt
     NVIC->ISER[0] |= (1) << TA1_0_IRQn;
 }
 
+void StopSong(void)
+{
+    TIMER_A1->CCTL[0] = 0x0000;
+    PlayNote(RestNote);
+    nextnote = 0;
+    insert_rest = 1;
+}
+
+void SongUp(void)
+{
+    songID = (songID + 1) % NUMBEROFSONGS;
+    lcd_clear();
+    lcd_puts(SongNames[songID]);
+    nextnote = 0;
+    insert_rest = 1;
+}
+
+void SongDown(void)
+{
+    songID = abs((songID - 1) % NUMBEROFSONGS);
+    lcd_clear();
+    lcd_puts(SongNames[songID]);
+    nextnote = 0;
+    insert_rest = 1;
+}
+
 void TA1_0_IRQHandler(void)
 {
-    static char nextnote=0;
-
-    static char insert_rest=1;
-
 
 
     if(TIMER_A1->CCTL[0] & TIMER_A_CCTLN_CCIFG)
@@ -93,7 +122,7 @@ void TA1_0_IRQHandler(void)
                  if(Song[songID][nextnote]!=NULL)
                      nextnote=nextnote+1;
                  else
-                     nextnote=0;
+                     StopSong();
                  PlayNote(Song[songID][nextnote]);
                  switch ((int)SongBeats[songID][nextnote]) {
                      case 1:   TIMER_A1->CCR[0] = WHOLE_NOTE; break;          //Set full note

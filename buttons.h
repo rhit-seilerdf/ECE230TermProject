@@ -22,9 +22,9 @@
 #define PitchHIGH BIT7
 
 #define PPbutton BIT0
-#define SKIPbutton BIT3
-#define SONGUP BIT5
-#define SONGDOWN BIT6
+#define STOPbutton BIT2
+#define SONGUPbutton BIT5
+#define SONGDOWNbutton BIT6
 
 #define Note1 ~BIT5
 #define Note2 ~BIT6
@@ -59,9 +59,9 @@
 #define Note24 ~(BIT0|BIT1|BIT4|BIT7)
 
 #define PPbuttonPressed ~(PPbutton)
-#define SkipPressed ~(SKIPbutton)
-#define SongUpPressed ~(SONGUP)
-#define SongDownPressed ~(SONGDOWN)
+#define StopPressed ~(STOPbutton)
+#define SongUpPressed ~(SONGUPbutton)
+#define SongDownPressed ~(SONGDOWNbutton)
 
 
 
@@ -69,7 +69,7 @@
 
 extern void ButtonInit();
 extern char FindNote(const char Notes[]);
-extern char FindButton(const char JukeboxPresses[]);
+extern JukeBoxButton FindButton(const char JukeboxPresses[]);
 extern void PlayNote(unsigned int CurrentNote);
 
 #endif /* BUTTONS_H_ */

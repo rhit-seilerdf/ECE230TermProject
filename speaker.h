@@ -14,6 +14,7 @@
 #include <stdio.h>  //NULL
 #include "csHFXT.h"
 #include "csLFXT.h"
+#include "lcd.h"
 
 #define SpeakerPort P2
 #define Speaker BIT4  //P2.4
@@ -103,15 +104,27 @@
 #define SIXTEENTH_NOTE ACLK/16
 #define DELAY100MS  ACLK/10    //100ms timer delay
 
-extern uint16_t songID;
 extern const uint16_t numberOfSongs;
 extern char *SongNames[];
+extern int songID;
+typedef enum
+{
+    START, STOP, PAUSE
+} PlayerStatus;
+
+typedef enum
+{
+    PLAYPAUSE = 1, STOPSONG=2, SONGUP=3, SONGDOWN=4
+} JukeBoxButton;
 
 
 extern void speaker_init(void);
 
 extern void PlayNote(unsigned int CurrentNote);
 
-extern void NoteDurationConfiguration();
+extern void StartSong();
+extern void StopSong();
+extern void SongUp();
+extern void SongDown();
 
 #endif /* SPEAKER_H_ */
