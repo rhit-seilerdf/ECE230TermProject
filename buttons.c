@@ -185,7 +185,7 @@ void playJukebox(JukeBoxButton FoundButton)
     }
 }
 
-#define DEBOUNCETIME 5000
+#define DEBOUNCETIME 15000
 void debounce(void)
 {
     uint16_t delayloop;

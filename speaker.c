@@ -73,6 +73,7 @@ void StartSong()
     // configure Timer_A1: ACLK, UP mode, TACLR=1 bit 2, no interrupt
     TIMER_A1->CTL = 0b0000000100010100;  //0x0114
     lcd_clear();
+    lcd_SetLineNumber(FirstLine);
     lcd_puts(SongNames[songID]);
     // Enable TA1 TA1CCR0 compare interrupt
     NVIC->ISER[0] |= (1) << TA1_0_IRQn;
@@ -90,6 +91,7 @@ void SongUp(void)
 {
     songID = (songID + 1) % NUMBEROFSONGS;
     lcd_clear();
+    lcd_SetLineNumber(FirstLine);
     lcd_puts(SongNames[songID]);
     nextnote = 0;
     insert_rest = 1;
@@ -99,6 +101,7 @@ void SongDown(void)
 {
     songID = abs((songID - 1) % NUMBEROFSONGS);
     lcd_clear();
+    lcd_SetLineNumber(FirstLine);
     lcd_puts(SongNames[songID]);
     nextnote = 0;
     insert_rest = 1;
