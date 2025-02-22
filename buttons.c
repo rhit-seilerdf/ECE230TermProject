@@ -267,8 +267,7 @@ void PORT6_IRQHandler(void)
     }
     else
     NewNotePressed = NO;
-    status = SwitchPort->IFG;
-    SwitchPort->IFG &= ~status;
+    SwitchPort->IFG = 0x0;
 
 }
 
@@ -288,8 +287,7 @@ void PORT3_IRQHandler(void)
     }
     else
         NewButtonPressed = NO;
-    status = JukeboxPort->IFG;
-    JukeboxPort->IFG &= ~status;
+    JukeboxPort->IFG = 0x0;
 
 }
 

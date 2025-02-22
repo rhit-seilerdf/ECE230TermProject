@@ -28,9 +28,7 @@ void main(void)
 	speaker_init();
 
 	lcd8bits_init();
-	lcd_clear();
     lcd_SetLineNumber(FirstLine);
-	lcd_home();
     lcd_puts(SongNames[songID]);
 
 //	NoteDurationConfiguration();
