@@ -147,7 +147,7 @@ void playJukebox(JukeBoxButton FoundButton)
          * TIMER_A0->CTL&=~0b0000000000110000;  //bits 5-4=0b00
          *  TIMER_A1->CTL&=~0b0000000000110000;  //bits 5-4=0b00
          */
-            TIMER_A0->CTL &= ~0b0000000000110000;  //bits 5-4=0b00
+            PlayNote(RestNote);
             TIMER_A1->CTL &= ~0b0000000000110000;  //bits 5-4=0b00
 
             Player = PAUSE;
@@ -256,6 +256,10 @@ void PORT6_IRQHandler(void)
 
 {
     uint32_t status;
+    if (Player == START){
+        StopSong();
+        Player = STOP;
+    }
     FoundNote = FindNote(Notes);
     if (FoundNote != 0)
     {
