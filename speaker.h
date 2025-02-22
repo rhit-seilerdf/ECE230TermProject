@@ -51,6 +51,7 @@
 #define FrequencyF4s 370
 #define FrequencyG4 392
 #define FrequencyA4f 415.3
+#define FrequencyA3f 220
 #define FrequencyG4s 415.3
 #define FrequencyB3f 233.08
 #define FrequencyB4f 466.16
@@ -85,6 +86,7 @@
 #define NOTEF4s TimerA0Clock/FrequencyF4s
 #define NOTEG4  TimerA0Clock/FrequencyG4
 #define NOTEA4f TimerA0Clock/FrequencyA4f
+#define NOTEA3f TimerA0Clock/FrequencyA3f
 #define NOTEG4s TimerA0Clock/FrequencyG4s
 #define NOTEB3f TimerA0Clock/FrequencyB3f
 #define NOTEB4f TimerA0Clock/FrequencyB4f

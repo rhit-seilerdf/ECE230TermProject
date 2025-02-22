@@ -33,10 +33,75 @@ void ButtonInit()
         JukeboxPort->DIR &= ~(PPbutton | SKIPbutton | SONGUP | SONGDOWN);
         JukeboxPort->REN |= (PPbutton | SKIPbutton | SONGUP | SONGDOWN);
         JukeboxPort->OUT |= (PPbutton | SKIPbutton | SONGUP | SONGDOWN);
-        JukeboxPort->IES |= (Button1 | Button2 | Button3 | PitchLOW | PitchMID | PitchHIGH);
-        JukeboxPort->IE |= (Button1 | Button2 | Button3 | PitchLOW | PitchMID | PitchHIGH);
-        JukeboxPort->IFG &= ~(Button1 | Button2 | Button3 | PitchLOW | PitchMID | PitchHIGH);
+        JukeboxPort->IES |= (PPbutton | SKIPbutton | SONGUP | SONGDOWN);
+        JukeboxPort->IE |= (PPbutton | SKIPbutton | SONGUP | SONGDOWN);
+        JukeboxPort->IFG &= ~(PPbutton | SKIPbutton | SONGUP | SONGDOWN);
         NVIC->ISER[1] |= (1)<<(PORT3_IRQn-32);
+}
+
+void playTrumpetNote(char FoundNote)
+{
+    unsigned int noteToPlay;
+    switch (FoundNote) {
+        case 1: noteToPlay = NOTEC4;
+                        break;
+        case 2: noteToPlay = NOTEG4;
+                        break;
+        case 3: noteToPlay = NOTEC5;
+                        break;
+        case 4: noteToPlay = NOTEA3;
+                        break;
+        case 5: noteToPlay = NOTEE4;
+                        break;
+        case 6: noteToPlay = NOTEA4;
+                        break;
+        case 7: noteToPlay = NOTEB3;
+                        break;
+        case 8: noteToPlay = NOTEF4s;
+                        break;
+        case 9: noteToPlay = NOTEB4;
+                        break;
+        case 10: noteToPlay = NOTEA3f;
+                        break;
+        case 11: noteToPlay = NOTEG4s;
+                        break;
+        case 12: noteToPlay = NOTEA4f;
+                        break;
+        case 13: noteToPlay = NOTEB3f;
+                        break;
+        case 14: noteToPlay = NOTEF4;
+                        break;
+        case 15: noteToPlay = NOTEB4f;
+                        break;
+        case 16: noteToPlay = NOTEG3;
+                        break;
+        case 17: noteToPlay = NOTED4;
+                        break;
+        case 18: noteToPlay = NOTEB4;
+                        break;
+        case 19: noteToPlay = NOTEA3;
+                        break;
+        case 20: noteToPlay = NOTEE4;
+                        break;
+        case 21: noteToPlay = NOTEA4;
+                        break;
+        case 22: noteToPlay = NOTEE5;
+                        break;
+        case 23: noteToPlay = NOTEF5;
+                    break;
+        case 24: noteToPlay = NOTEG5;
+                    break;
+        default: noteToPlay = RestNote;
+            break;
+    }
+    PlayNote(noteToPlay);
+}
+
+#define DEBOUNCETIME 1000
+void debounce(void)
+{
+    uint16_t delayloop;
+    for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
 }
 
 
@@ -45,48 +110,44 @@ void ButtonInit()
  */
 
 char FindNote(const char Notes[]){
-#define DEBOUNCETIME 15000
 char i;
 char NoteNumber;
 char PortValue;
-uint16_t delayloop;
-    for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
     for(i=0;i<=23;i++) {
 //output key pattern
         PortValue = SwitchPort->IN;
         if((PortValue & NoteBits) ==(Notes[i] & NoteBits))  {   //check key press
-            for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
+            debounce();
             if((PortValue & NoteBits) ==(Notes[i] & NoteBits))  {   //still pressed
                 NoteNumber = i+1;
+                playTrumpetNote(NoteNumber);
                 while((PortValue & NoteBits) ==(Notes[i] & NoteBits))
                     PortValue=SwitchPort->IN; //wait for release
+                PlayNote(RestNote);
                 break;
         }
-        for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
+        debounce();
     }
 }
     return NoteNumber;
 }
 
 char FindButton(const char JukeBoxPresses[]){
-#define DEBOUNCETIME 15000
 char i;
 char ButtonNumber;
 char PortValue;
-uint16_t delayloop;
-    for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
     for(i=0;i<=3;i++) {
 //output key pattern
         PortValue = JukeboxPort->IN;
-        if((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))  {   //check key press
-            for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
-            if((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))  {   //still pressed
-                ButtonNumber = i+1;
-                while((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))
-                    PortValue=JukeboxPort->IN; //wait for release
-                break;
-        }
-        for(delayloop=0; delayloop<DEBOUNCETIME; delayloop++); //debounce the key
+               if((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))  {   //check key press
+                   debounce();
+                   if((PortValue & ButtonBits) ==(JukeBoxPresses[i] & ButtonBits))  {   //still pressed
+                       ButtonNumber = i+1;
+                       while((PortValue & ButtonBits) ==(Notes[i] & ButtonBits))
+                           PortValue=JukeboxPort->IN; //wait for release
+                       break;
+               }
+               debounce();
     }
 }
     return ButtonNumber;
@@ -100,7 +161,6 @@ void PORT6_IRQHandler(void)
 {
     uint32_t status;
     FoundNote = FindNote(Notes);
-
     if(FoundNote!=0) {
             NewNotePressed=YES;
         }

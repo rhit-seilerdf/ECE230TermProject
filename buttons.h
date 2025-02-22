@@ -8,6 +8,7 @@
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
 #include <msp.h>
+#include "speaker.h"
 
 #define SwitchPort P6
 #define JukeboxPort P3
@@ -21,7 +22,7 @@
 #define PitchHIGH BIT7
 
 #define PPbutton BIT0
-#define SKIPbutton BIT2
+#define SKIPbutton BIT3
 #define SONGUP BIT5
 #define SONGDOWN BIT6
 
@@ -69,5 +70,6 @@
 extern void ButtonInit();
 extern char FindNote(const char Notes[]);
 extern char FindButton(const char JukeboxPresses[]);
+extern void PlayNote(unsigned int CurrentNote);
 
 #endif /* BUTTONS_H_ */
