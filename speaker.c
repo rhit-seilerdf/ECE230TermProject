@@ -7,7 +7,7 @@
 
 #include "speaker.h"
 #include <stdlib.h>
-#define NUMBEROFSONGS 2
+#define NUMBEROFSONGS 3
 
 int songID = 0;
 static char nextnote = 0;
@@ -45,7 +45,7 @@ const uint16_t TwinkleBeats[] = { 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2,
                                   2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1,
                                   1, 2, 2, 1, 1, 1, 1 };
 
-const uint16_t CurrentMusicNotes[] = {
+const uint16_t SariaSong[] = {
 NOTEF4,
                                        NOTEA4, NOTEB4,
                                        NOTEF4,
@@ -56,13 +56,14 @@ NOTEF4,
                                        NOTEB4, NOTEC5, NOTEB4, NOTEG4, NOTEE4,
                                        NOTED4,
                                        NOTEE4, NOTEG4, NOTEE4, NULL };
-const uint16_t CurrentMusicBeats[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 4,
+const uint16_t SariaSongBeats[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 4,
                                        4, 1, 2, 4, 4, 1, NULL };
+const uint16_t DebugSong[] = {NOTEA4, RestNote, NOTEA4, RestNote, NULL};
+const uint16_t DebugSongBeats[] = {1, 8, 16, 8};
 
-const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar,
-                                        CurrentMusicNotes };
-const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, CurrentMusicBeats };
-char *SongNames[] = { "Twinkle Twinkle", "Lost Woods Theme" };
+const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar, SariaSong, DebugSong};
+const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, SariaSongBeats, DebugSongBeats};
+char *SongNames[] = { "Twinkle Twinkle Little Start", "Lost Woods Theme", "Debug" };
 
 void speaker_init(void)
 {

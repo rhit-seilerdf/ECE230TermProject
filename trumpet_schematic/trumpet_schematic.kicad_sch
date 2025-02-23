@@ -7,8 +7,10 @@
 	(title_block
 		(title "Trumpet Schematic")
 		(date "2025-02-13")
-		(rev "1")
+		(rev "2")
 		(company "Rose-Hulman Institute of Technology")
+		(comment 1 "Ian Morton")
+		(comment 2 "Dan Seiler")
 	)
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x16"
