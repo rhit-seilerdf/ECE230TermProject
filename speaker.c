@@ -7,7 +7,7 @@
 
 #include "speaker.h"
 #include <stdlib.h>
-#define NUMBEROFSONGS 3
+#define NUMBEROFSONGS 2
 
 int songID = 0;
 static char nextnote = 0;
@@ -58,12 +58,12 @@ NOTEF4,
                                        NOTEE4, NOTEG4, NOTEE4, NULL };
 const uint16_t SariaSongBeats[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 4,
                                        4, 1, 2, 4, 4, 1, NULL };
-const uint16_t DebugSong[] = {NOTEA4, RestNote, NOTEA4, RestNote, NULL};
-const uint16_t DebugSongBeats[] = {1, 8, 16, 8};
+//const uint16_t DebugSong[] = {NOTEA4, RestNote, NOTEA4, RestNote, NULL};
+//const uint16_t DebugSongBeats[] = {1, 8, 16, 8};
 
-const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar, SariaSong, DebugSong};
-const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, SariaSongBeats, DebugSongBeats};
-char *SongNames[] = { "Twinkle Twinkle Little Start", "Lost Woods Theme", "Debug" };
+const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar, SariaSong};
+const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, SariaSongBeats};
+char *SongNames[] = { "Twinkle Twinkle", "Lost Woods Theme"};
 
 void speaker_init(void)
 {
@@ -119,7 +119,7 @@ void SongUp(void)
 
 void SongDown(void)
 {
-    songID = abs((songID - 1) % NUMBEROFSONGS);
+    songID = abs((songID - 1)) % NUMBEROFSONGS;
     lcd_SetLineNumber(FirstLine);
     lcd_puts(SongNames[songID]);
     nextnote = 0;
