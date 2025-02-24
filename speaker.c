@@ -61,9 +61,9 @@ const uint16_t SariaSongBeats[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 4,
 const uint16_t DebugSong[] = {NOTEA4, RestNote, NOTEA4, RestNote, NULL};
 const uint16_t DebugSongBeats[] = {1, 8, 16, 8};
 
-const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar, SariaSong, DebugSong};
-const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, SariaSongBeats, DebugSongBeats};
-char *SongNames[] = { "Twinkle Twinkle Little Start", "Lost Woods Theme", "Debug" };
+const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar, SariaSong};
+const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, SariaSongBeats};
+char *SongNames[] = { "Twinkle Twinkle Little Star", "Lost Woods Theme" };
 
 void speaker_init(void)
 {

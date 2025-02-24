@@ -17,6 +17,7 @@ char NewButtonPressed = NO;
 JukeBoxButton FoundButton;
 PlayerStatus Player = STOP;
 
+
 const char NoteBits = (Button1 | Button2 | Button3 | PitchLOW | PitchMID
         | PitchHIGH );
 const char Notes[24] =
