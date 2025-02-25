@@ -63,7 +63,7 @@ const uint16_t SariaSongBeats[] = { 4, 4, 2, 4, 4, 2, 4, 4, 4, 4, 2, 4, 4, 4,
 
 const uint16_t *Song[NUMBEROFSONGS] = { TwinkleTwinkleLittleStar, SariaSong};
 const uint16_t *SongBeats[NUMBEROFSONGS] = { TwinkleBeats, SariaSongBeats};
-char *SongNames[] = { "Twinkle Twinkle", "Lost Woods Theme"};
+char *SongNames[] = { "Twinkle Twinkle     ", "Lost Woods Theme     "};
 
 void speaker_init(void)
 {

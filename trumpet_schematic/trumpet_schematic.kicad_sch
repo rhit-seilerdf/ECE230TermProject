@@ -2139,6 +2139,16 @@
 		)
 		(uuid "1bfbc932-a6be-4925-9047-0b5500acbe2b")
 	)
+	(text "LCD"
+		(exclude_from_sim no)
+		(at 227.33 94.234 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "1de0296c-aae7-44c3-b580-7d6cd7cbc778")
+	)
 	(text "PITCH"
 		(exclude_from_sim no)
 		(at 202.692 131.318 0)
@@ -2169,6 +2179,16 @@
 		)
 		(uuid "3f64fc34-f214-4898-9774-b70e6393e610")
 	)
+	(text "RS"
+		(exclude_from_sim no)
+		(at 227.584 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "47fa81a1-429e-493a-865d-43b3fad98a29")
+	)
 	(text "NOTES\n"
 		(exclude_from_sim no)
 		(at 203.2 115.57 0)
@@ -2178,6 +2198,16 @@
 			)
 		)
 		(uuid "65714574-74d9-45da-89bd-684853616fea")
+	)
+	(text "Speaker"
+		(exclude_from_sim no)
+		(at 226.822 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "6630d264-b6ac-4013-b54d-e60a80e87213")
 	)
 	(text "SW9"
 		(exclude_from_sim no)
@@ -2278,6 +2308,16 @@
 			)
 		)
 		(uuid "b5081354-da4d-4aa8-985f-2cfab44ac93b")
+	)
+	(text "E"
+		(exclude_from_sim no)
+		(at 227.33 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "d63ec19e-7886-4984-9d9a-a71e1766d906")
 	)
 	(text "PLAY/PAUSE\n"
 		(exclude_from_sim no)

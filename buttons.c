@@ -253,9 +253,7 @@ JukeBoxButton FindButton(const char JukeBoxPresses[])
  * Interrupt for notes and pitch
  */
 void PORT6_IRQHandler(void)
-
 {
-    uint32_t status;
     if (Player == START){
         StopSong();
         Player = STOP;
@@ -267,7 +265,7 @@ void PORT6_IRQHandler(void)
     }
     else
     NewNotePressed = NO;
-    SwitchPort->IFG = 0x0;
+    SwitchPort->IFG = 0x00;
 
 }
 
@@ -275,9 +273,7 @@ void PORT6_IRQHandler(void)
  * Interrupt for jukebox buttons
  */
 void PORT3_IRQHandler(void)
-
 {
-    uint32_t status;
     FoundButton = FindButton(JukeboxPresses);
 
     if (FoundButton != 0)
@@ -287,7 +283,7 @@ void PORT3_IRQHandler(void)
     }
     else
         NewButtonPressed = NO;
-    JukeboxPort->IFG = 0x0;
+    JukeboxPort->IFG = 0x00;
 
 }
 
