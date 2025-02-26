@@ -1,4 +1,4 @@
-//File Name: lcd8bitsece230winter24_25.h
+//File Name: lcd.h
 //Author: Jianjian Song
 //Date: January 28, 2025
 //ECE230-01/02 Winter 2024-2025

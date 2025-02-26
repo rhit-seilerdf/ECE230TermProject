@@ -6,7 +6,7 @@
  *               Launchpad.
  *
  *  Created on:
- *      Author:
+ *      Author: JianJian Song
  */
 
 

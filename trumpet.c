@@ -1,7 +1,19 @@
+/**
+ *
+ * trumpet.c
+ *
+ *  Created on: Feb 14, 2025
+ *      Author: mortonip, seilerdf
+ *
+ *      Contains main code.
+ *
+ *      - Initialize LCD, buttons, speaker, clocks
+ *      - Allow interrupts to handle active behavior
+ *      - Print button presses, for debugging.
+ */
+
 #include "msp.h"
 #include "trumpet.h"
-
-
 
 enum Status {NO, YES};
 extern char NewNotePressed;
@@ -39,6 +51,9 @@ void main(void)
 
 	__enable_irq();
 
+	/**
+	 * Allow interrupts to handle behavior. Print found note/jukebox button presses.
+	 */
 	while (1) {
 	    if(NewNotePressed==YES) {
 	                NewNotePressed=NO;

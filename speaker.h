@@ -2,7 +2,7 @@
  * speaker.h
  *
  *  Created on: Feb 14, 2025
- *      Author: mortonip
+ *      Author: mortonip, seilerdf
  */
 
 #ifndef SPEAKER_H_
@@ -27,37 +27,37 @@
 #define TimerA0Clock  SMCLK/TimerA0Prescaler
 
 #define RestNote 1
-#define FrequencyA4 440 //Hz
-#define FrequencyB4 493.88 //Hz
-#define FrequencyC5 523.26 //Hz
-#define FrequencyG3 196.00
-#define FrequencyD4 293.66
-#define FrequencyE4 329.63
-#define FrequencyC4 261.63
-#define FrequencyB3 246.94
-#define FrequencyA3 220.00
-#define FrequencyA4 440 //Hz
-#define FrequencyB4 493.88 //Hz
-#define FrequencyC5 523.26 //Hz
+#define FrequencyA4 440     // Hz
+#define FrequencyB4 493.88  // Hz
+#define FrequencyC5 523.26  // Hz
+#define FrequencyG3 196.00  // Hz
+#define FrequencyD4 293.66  // Hz
+#define FrequencyE4 329.63  // Hz
+#define FrequencyC4 261.63  // Hz
+#define FrequencyB3 246.94  // Hz
+#define FrequencyA3 220.00  // Hz
+#define FrequencyA4 440     // Hz
+#define FrequencyB4 493.88  // Hz
+#define FrequencyC5 523.26  // Hz
 
-#define FrequencyF4 349.23 //Hz
-#define FrequencyA4 440 //Hz
-#define FrequencyE5 659.25
-#define FrequencyD5 587.33
-#define FrequencyD4 293.66
-#define FrequencyE4 329.63
-#define FrequencyG4 392
+#define FrequencyF4 349.23  // Hz
+#define FrequencyA4 440     // Hz
+#define FrequencyE5 659.25  // Hz
+#define FrequencyD5 587.33  // Hz
+#define FrequencyD4 293.66  // Hz
+#define FrequencyE4 329.63  // Hz
+#define FrequencyG4 392     // Hz
 
-#define FrequencyB3 246.94
-#define FrequencyF4s 370
-#define FrequencyG4 392
-#define FrequencyA4f 415.3
-#define FrequencyA3f 220
-#define FrequencyG4s 415.3
-#define FrequencyB3f 233.08
-#define FrequencyB4f 466.16
-#define FrequencyF5 698.46
-#define FrequencyG5 784
+#define FrequencyB3 246.94  // Hz
+#define FrequencyF4s 370    // Hz
+#define FrequencyG4 392     // Hz
+#define FrequencyA4f 415.3  // Hz
+#define FrequencyA3f 220    // Hz
+#define FrequencyG4s 415.3  // Hz
+#define FrequencyB3f 233.08 // Hz
+#define FrequencyB4f 466.16 // Hz
+#define FrequencyF5 698.46  // Hz
+#define FrequencyG5 784     // Hz
 
 
 // Note A4 - 440 Hz, B4 - 493.88 Hz, C5 - 523.26 Hz
@@ -95,13 +95,13 @@
 #define NOTEG5  TimerA0Clock/FrequencyG5
 
 #define ACLK 32768 //Hz
-#define WHOLE_NOTE       ACLK    //1 second
-#define HALF_NOTE   ACLK/2  //0.5 second
-#define QUARTER_NOTE    ACLK/4  //0.25 second
-#define DOTTED_HALF  QUARTER_NOTE *3
-#define EIGHTH_NOTE ACLK/8
-#define DOTTED_QUARTER  EIGHTH_NOTE *3
-#define SIXTEENTH_NOTE ACLK/16
+#define WHOLE_NOTE       ACLK        //1 second
+#define HALF_NOTE   ACLK/2           //0.5 second
+#define QUARTER_NOTE    ACLK/4       //0.25 second
+#define DOTTED_HALF  QUARTER_NOTE *3 //0.75 second
+#define EIGHTH_NOTE ACLK/8           //0.125 second
+#define DOTTED_QUARTER EIGHTH_NOTE*3 //0.375 second
+#define SIXTEENTH_NOTE ACLK/16       //0.0625 second
 #define DELAY100MS  ACLK/10    //100ms timer delay
 
 extern const uint16_t numberOfSongs;

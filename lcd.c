@@ -1,4 +1,4 @@
-//File Name: lcd8bits_ece230winter24_25.c
+//File Name: lcd.c
 //Author: Jianjian Song
 //Date: January 28, 2025
 //ECE230-01/02 Winter 2024-2025
@@ -143,10 +143,6 @@ void lcd8bits_write(unsigned char mode, unsigned char CmdChar) {
     DelayMs(10);
     LCD_DATA->OUT = CmdChar;
     LCD_STROBE(); // Write 8 bits of data on D7-0
-}
-
-void lcd_home(void) {
-    lcd8bits_write(CMD_MODE, 0x02);
 }
 
 /* write a string of chars to the LCD */

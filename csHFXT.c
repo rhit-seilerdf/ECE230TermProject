@@ -6,7 +6,7 @@
  *               Launchpad. Assumes LED1 configured for output.
  *
  *  Created on:
- *      Author:
+ *      Author: JianJian Song
  */
 
 #include "msp.h"

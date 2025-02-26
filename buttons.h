@@ -2,7 +2,9 @@
  * buttons.h
  *
  *  Created on: Feb 18, 2025
- *      Author: seilerdf
+ *      Author: seilerdf, mortonip
+ *
+ *      defines note and jukebox button pin locations
  */
 
 #ifndef BUTTONS_H_

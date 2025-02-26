@@ -6,7 +6,7 @@
  *               Launchpad.
  *
  *  Created on:
- *      Author: seilerdf
+ *      Author: JianJian Song
  */
 
 #ifndef CSLFXT_H_
